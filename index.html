@@ -1,27 +1,400 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      overflow: hidden;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bank</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f7f7f7;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                 "SF Pro Text", Arial, sans-serif;
+    color: #111;
+}
+
+.app {
+    min-height: 100vh;
+    background: white;
+    max-width: 900px;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* BLUE HEADER */
+.header {
+    height: 120px;
+    background: linear-gradient(#07517d, #087bc8);
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 25px;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+/* MAIN CONTENT */
+.content {
+    padding: 34px 36px 125px;
+}
+
+/* INFO BOX */
+.notice {
+    border: 2px solid #b8def5;
+    border-radius: 12px;
+    background: white;
+    padding: 24px 25px;
+    display: flex;
+    gap: 18px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.info {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    border-radius: 50%;
+    background: #087ac6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 19px;
+}
+
+.notice p {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.34;
+}
+
+/* EARNINGS CARD */
+.card {
+    margin-top: 40px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.07);
+}
+
+.range {
+    text-align: center;
+    padding: 31px 10px 29px;
+    font-size: 21px;
+    border-bottom: 1px solid #ddd;
+}
+
+.row {
+    height: 98px;
+    display: flex;
+    align-items: center;
+    padding: 0 31px;
+    border-bottom: 1px solid #ddd;
+    font-size: 20px;
+}
+
+.row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    flex: 1;
+}
+
+.amount {
+    font-size: 22px;
+}
+
+.chevron {
+    font-size: 34px;
+    color: #bbb;
+    margin-left: 16px;
+    font-weight: 300;
+}
+
+/* DELAY TEXT */
+.delay {
+    text-align: center;
+    color: #777;
+    font-size: 18px;
+    margin: 36px 0 65px;
+}
+
+/* WE OWE YOU */
+.owe {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 38px 30px 33px;
+    text-align: center;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.07);
+}
+
+.owe h2 {
+    font-size: 20px;
+    margin: 0 0 14px;
+}
+
+.money {
+    font-size: 50px;
+    letter-spacing: .5px;
+    font-weight: 400;
+}
+
+.minus {
+    font-size: 18px;
+    color: #777;
+    margin-top: 8px;
+}
+
+/* WITHDRAW BUTTON */
+.withdraw {
+    margin-top: 36px;
+    height: 68px;
+    border: none;
+    border-radius: 10px;
+    background: #087ac6;
+    color: white;
+    font-size: 21px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+}
+
+.withdraw:active {
+    transform: scale(.99);
+}
+
+/* BOTTOM NAV */
+.nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(900px, 100%);
+    height: 105px;
+    background: white;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: #777;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+
+.nav-item.active {
+    color: #087ac6;
+}
+
+.icon {
+    font-size: 29px;
+    line-height: 1;
+}
+
+/* PHONE SIZE */
+@media (max-width: 600px) {
+
+    .header {
+        height: 105px;
+        padding-bottom: 23px;
     }
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+    .content {
+        padding: 28px 16px 120px;
     }
-  </style>
+
+    .notice {
+        padding: 19px 17px;
+    }
+
+    .notice p {
+        font-size: 17px;
+    }
+
+    .range {
+        font-size: 18px;
+    }
+
+    .row {
+        padding: 0 22px;
+        height: 82px;
+        font-size: 17px;
+    }
+
+    .amount {
+        font-size: 18px;
+    }
+
+    .owe {
+        padding: 32px 18px;
+    }
+
+    .money {
+        font-size: 39px;
+    }
+
+    .delay {
+        font-size: 15px;
+        margin: 28px 0 48px;
+    }
+
+    .nav {
+        height: 84px;
+    }
+
+    .nav-item {
+        font-size: 12px;
+    }
+
+    .icon {
+        font-size: 24px;
+    }
+}
+</style>
 </head>
+
 <body>
-  <img src="3D14B4B4-34D6-475B-8E99-0355C1081365.jpeg">
+
+<div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+        Bank
+    </header>
+
+    <main class="content">
+
+        <!-- YOUTUBE NOTICE -->
+        <section class="notice">
+
+            <div class="info">i</div>
+
+            <p>
+                July earnings from YouTube are currently delayed,
+                and we expect to receive them within the next 30 days.
+                They will be added to your DistroBank as soon as they
+                are received and processed.
+            </p>
+
+        </section>
+
+
+        <!-- EARNINGS -->
+        <section class="card">
+
+            <div class="range">
+                October 2018 thru July 2026
+            </div>
+
+            <div class="row">
+                <span class="label">
+                    Total Earnings
+                </span>
+
+                <span class="amount">
+                    $139,945.00
+                </span>
+
+                <span class="chevron">
+                    ›
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">
+                    Withdrawals
+                </span>
+
+                <span class="amount">
+                    $5,340.25
+                </span>
+
+                <span class="chevron">
+                    ›
+                </span>
+            </div>
+
+        </section>
+
+
+        <!-- DELAY -->
+        <div class="delay">
+            Streaming services typically report on a 2-3 month delay.
+        </div>
+
+
+        <!-- BALANCE -->
+        <section class="owe">
+
+            <h2>
+                We owe you
+            </h2>
+
+            <div class="money">
+                $134,604.75
+            </div>
+
+            <div class="minus">
+                minus Tipalti fees
+            </div>
+
+            <button class="withdraw"
+                onclick="alert('Withdrawal unavailable in this mock interface.')">
+                Withdraw earnings
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- BOTTOM NAV -->
+    <nav class="nav">
+
+        <button class="nav-item">
+            <span class="icon">⌂</span>
+            Music
+        </button>
+
+        <button class="nav-item active">
+            <span class="icon">♜</span>
+            Bank
+        </button>
+
+        <button class="nav-item">
+            <span class="icon">⊕</span>
+            Upload
+        </button>
+
+        <button class="nav-item">
+            <span class="icon">⌁</span>
+            Stats
+        </button>
+
+        <button class="nav-item">
+            <span class="icon">●</span>
+            Account
+        </button>
+
+    </nav>
+
+</div>
+
 </body>
 </html>
